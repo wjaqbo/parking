@@ -1,23 +1,51 @@
-import logo from './logo.svg';
 import './App.css';
+import { useEffect, useState } from 'react';
+
+import Garage from './components/Garage';
+import RequestForm from './components/RequestForm';
 
 function App() {
+  const [date, setDate] = useState('');
+  const [time, setTime] = useState('');
+  const [user, setUser] = useState({
+    fname: 'Stacey',
+    lname: 'Gonzalez',
+    plates: 'ZS56477',
+    car: 'Honda Civic',
+  });
+  const [parkedCars, setParkedCars] = useState([
+    { plate: 'ZS56477', parkingNumber: '50' },
+  ]);
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    console.log('user', user);
+    console.log('date', date);
+    console.log('time', time);
+  };
+
+  const handleChange = e => {
+    if (e.target.name === 'time') {
+      setTime(e.target.value);
+    } else if (e.target.name === 'date') {
+      setDate(e.target.value);
+    }
+
+    console.log('changed input value', e.target.value);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <RequestForm
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        time={time}
+        date={date}
+      />
+      <h2>Garage P1</h2>
+      <Garage />
+      <h2>Garage P2</h2>
+      <Garage />
     </div>
   );
 }

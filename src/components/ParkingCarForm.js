@@ -7,7 +7,7 @@ export const ParkingCarForm = ({handleSubmit, handleChange, car, parkingNumber})
                 <label>Parking number</label>
                 <input name="parkingnumber" type="number" value={parkingNumber} onChange={handleChange} />
                 <label>Plates</label>
-                <input name="car" type="text" value={car} onChange={handleChange}/>
+                <input name="car" type="text" value={car} onChange={handleChange} className="uppercase"/>
                 <button className="bg-blue-400 py-5 px-10 border-r-2 text-white font-bold text-2xl">Park car</button>
             </form>
         </div>

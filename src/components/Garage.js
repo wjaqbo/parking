@@ -7,7 +7,7 @@ const Garage = ({parkedCars}) => {
       {parkedCars.map((element, index) => (
         <div className="parking-place bg-gray-200 cursor-pointer p-2" key={index}>
           <p className="font-bold text-xs">Parking no {index}</p>
-          <p>car: {element.plates}</p>
+          <p className="uppercase font-bold text-2xl">{element.plates}</p>
         </div>
       ))}
     </div>

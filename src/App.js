@@ -44,8 +44,9 @@ function App() {
     e.preventDefault();
     const parkingConfirmed = window.confirm(`Are you sure to park you car ${car} at place number ${parkingNumber}`)
     if(parkingConfirmed) {
-    console.log('parking number', parkingNumber);
-    console.log('car', car);
+      const newParkingState = [...parkedCars]
+      newParkingState[parkingNumber] = {id: parkingNumber, plates: car};
+      setParkedCars(newParkingState);
     }
 }
   const handleParkingChange = e => {

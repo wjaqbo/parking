@@ -9,13 +9,14 @@ import ClearPlaceForm from './components/ClearPlaceForm';
 function App() {
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
-  const [car, setCar] = useState('ZS56477');
+  const [car, setCar] = useState('ZS5587');
   const [parkingNumber, setParkingNumber] = useState(0);
   const [placeToClear, setPlaceToClear] = useState(0);
   const [user, setUser] = useState({
     fname: 'Stacey',
     lname: 'Gonzalez',
-    plates: 'ZS56477',
+    email: 'stacey.gonzalez@gmail.com',
+    plates: 'ZS5587',
     car: 'Honda Civic',
   });
 
@@ -30,11 +31,11 @@ function App() {
     if(orderConfirmed) {
       const newParkingState = [...parkedCars]
       const index = parkedCars.findIndex(element => (element.plates === user.plates))
-      newParkingState[index] = {id: parkingNumber, plates: car, pickUpAt: time};
+      newParkingState[index] = {id: parkingNumber, plates: user.plates, pickUpAt: time};
       setParkedCars(newParkingState);
-    console.log('user', user);
-    console.log('date', date);
-    console.log('time', time);
+      console.log('user', user);
+      console.log('date', date);
+      console.log('time', time);
     }
   };
 
@@ -43,6 +44,10 @@ function App() {
       setTime(e.target.value);
     } else if (e.target.name === 'date') {
       setDate(e.target.value);
+    } else if (e.target.name === 'plates') {
+      const newUserState = {...user};
+      newUserState.plates = e.target.value;
+      setUser(newUserState);
     }
   };
 
@@ -52,8 +57,11 @@ function App() {
     const parkingConfirmed = window.confirm(`Are you sure to park you car ${car} at place number ${parkingNumber}`)
     if(parkingConfirmed) {
       const newParkingState = [...parkedCars]
-      newParkingState[parkingNumber] = {id: parkingNumber, plates: car, pickUpAt: null};
-      setParkedCars(newParkingState);
+      const alredyExists = parkedCars.find((element) => element.plates === car)
+      if(!alredyExists) {
+        newParkingState[parkingNumber] = {id: parkingNumber, plates: car, pickUpAt: null};
+        setParkedCars(newParkingState);
+      }
     }
 }
   const handleParkingChange = e => {
@@ -67,7 +75,7 @@ function App() {
   const handleCleanSubmit = e => {
     e.preventDefault();
     const newParkingState = [...parkedCars]
-      newParkingState[placeToClear] = {id: placeToClear, plates: null};
+      newParkingState[placeToClear] = {id: placeToClear, plates: null, pickUpAt: null};
       setParkedCars(newParkingState);
 
   }
@@ -83,6 +91,7 @@ function App() {
         handleSubmit={handleSubmit}
         time={time}
         date={date}
+        user={user}
       />
       <ClearPlaceForm handleSubmit={handleCleanSubmit} handleChange={handleCleanChange} placeToClear={placeToClear}/>
       <ParkingCarForm handleSubmit={handleParking} handleChange={handleParkingChange} car={car} parkingNumber={parkingNumber}/>

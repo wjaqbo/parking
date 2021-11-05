@@ -15,3 +15,6 @@ input {
 .free {
   background-color: aquamarine;
 }
+.ordered {
+  background-color: rgb(215, 133, 133);
+}

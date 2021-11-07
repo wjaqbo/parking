@@ -1,5 +1,6 @@
 import './App.css';
 import { useState } from 'react';
+import useLocalState from './hooks/localStorage'
 
 import Garage from './components/Garage';
 import RequestForm from './components/RequestForm';
@@ -7,23 +8,23 @@ import ParkingCarForm from './components/ParkingCarForm'
 import ClearPlaceForm from './components/ClearPlaceForm';
 
 function App() {
-  const [date, setDate] = useState('');
-  const [time, setTime] = useState('');
-  const [car, setCar] = useState('ZS5587');
-  const [parkingNumber, setParkingNumber] = useState(0);
+  const [date, setDate] = useLocalState('date', '');
+  const [time, setTime] = useLocalState('time', '');
+  const [car, setCar] = useLocalState('car', 'CHIC000');
+  const [parkingNumber, setParkingNumber] = useLocalState('parkingNumber', 0);
   const [placeToClear, setPlaceToClear] = useState(0);
   const [user, setUser] = useState({
     fname: 'Stacey',
     lname: 'Gonzalez',
     email: 'stacey.gonzalez@gmail.com',
-    plates: 'ZS5587',
+    plates: '',
     car: 'Honda Civic',
   });
 
 
   const parkingPlaces = Array.from({ length: 100 });
   const emptyParking = parkingPlaces.map((element, index) => ({id: index, plates: null, pickUpAt: null}))
-  const [parkedCars, setParkedCars] = useState(emptyParking);
+  const [parkedCars, setParkedCars] = useLocalState('parkedCars', emptyParking);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -46,7 +47,7 @@ function App() {
       setDate(e.target.value);
     } else if (e.target.name === 'plates') {
       const newUserState = {...user};
-      newUserState.plates = e.target.value;
+      newUserState.plates = e.target.value.toUpperCase();
       setUser(newUserState);
     }
   };
@@ -59,16 +60,18 @@ function App() {
       const newParkingState = [...parkedCars]
       const alredyExists = parkedCars.find((element) => element.plates === car)
       if(!alredyExists) {
-        newParkingState[parkingNumber] = {id: parkingNumber, plates: car, pickUpAt: null};
+        newParkingState[parkingNumber] = {id: parseInt(parkingNumber), plates: car, pickUpAt: null};
         setParkedCars(newParkingState);
+      } else {
+        alert(`Car ${car} is already parked.`)
       }
     }
 }
   const handleParkingChange = e => {
     if(e.target.name === 'parkingnumber') {
-      setParkingNumber(e.target.value)
+      setParkingNumber(e.target.value.toUpperCase())
     } else if (e.target.name === 'car') {
-      setCar(e.target.value)
+      setCar(e.target.value.toUpperCase())
     }
   }
 

@@ -4,7 +4,7 @@ import React from 'react';
 const Garage = ({parkedCars}) => {
   return (
     <div className="garage flex items-center">
-      {parkedCars.map((element, index) => {
+      {parkedCars && parkedCars.map((element, index) => {
         const isFree = (element.plates === null);
         const isOrdered = (element.pickUpAt !== null);
         return (<div className={`parking-place bg-gray-200 cursor-pointer p-2 ${isFree ? "free" : "" } ${isOrdered ? "ordered" : "" }`} key={index}>

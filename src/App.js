@@ -12,12 +12,12 @@ function App() {
   const [time, setTime] = useLocalState('time', '');
   const [car, setCar] = useLocalState('car', 'CHIC000');
   const [parkingNumber, setParkingNumber] = useLocalState('parkingNumber', 0);
-  const [placeToClear, setPlaceToClear] = useState(0);
-  const [user, setUser] = useState({
+  const [placeToClear, setPlaceToClear] = useLocalState('placeToClear', 0);
+  const [user, setUser] = useLocalState('user', {
     fname: 'Stacey',
     lname: 'Gonzalez',
     email: 'stacey.gonzalez@gmail.com',
-    plates: '',
+    plates: 'Z54887',
     car: 'Honda Civic',
   });
 

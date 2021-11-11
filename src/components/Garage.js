@@ -7,10 +7,11 @@ const Garage = ({parkedCars}) => {
       {parkedCars && parkedCars.map((element, index) => {
         const isFree = (element.plates === null);
         const isOrdered = (element.pickUpAt !== null);
-        return (<div className={`parking-place bg-gray-200 cursor-pointer p-2 ${isFree ? "free" : "" } ${isOrdered ? "ordered" : "" }`} key={index}>
+        return (<div className={`parking-place bg-gray-200 flex flex-col justify-between p-2 ${isFree ? "free" : "" } ${isOrdered ? "ordered bg-red-600" : "" }`} key={index}>
           <p className="font-bold text-xs">Parking no {index}</p>
-          <p className="uppercase font-bold text-2xl">{element.plates}</p>
-          {(element.pickUpAt) && <p>Pick up at: {element.pickUpAt}</p>}
+          <p className="uppercase font-bold text-2xl mb-auto">{element.plates}</p>
+          {(element.pickUpAt) && <p>Pick up at: </p>}
+          {(element.pickUpAt) && <p className="font-bold text-3xl">{element.pickUpAt}</p>}
         </div>)
       })}
     </div>

@@ -1,6 +1,10 @@
 input {
-  font-size: 2rem;
-  background-color: transparent;
+  font-size: 1.5rem;
+  background-color: rgba(229, 231, 235, var(--tw-bg-opacity));
+  /* border-bottom: 1px solid #000; */
+  padding: 0 20px;
+  height: 4rem;
+  margin-right: 0.5rem;
 }
 .garage {
   display: flex;
@@ -16,5 +20,5 @@ input {
   background-color: aquamarine;
 }
 .ordered {
-  background-color: rgb(215, 133, 133);
+  color: #fff
 }

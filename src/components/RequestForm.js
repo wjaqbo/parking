@@ -7,8 +7,9 @@ const RequestForm = ({ handleSubmit, handleChange, date, time, user }) => {
       <form onSubmit={handleSubmit} className="border-gray-900 mb-2 p-10 flex justify-between items-center">
         <input name="date" type="date" value={date} onChange={handleChange} />
         <input name="time" type="time" value={time} onChange={handleChange} />
+        <label className="mx-2">Plates</label>
         <input name="plates" type="text" value={user.plates} onChange={handleChange} className="uppercase"/>
-        <button className="bg-blue-400 py-5 px-10 border-r-2 text-white font-bold text-2xl w-64">Order car</button>
+        <button className="bg-blue-600 h-16 px-10 border-r-2 text-white text-2xl w-64">Order car</button>
       </form>
     </div>
   );
